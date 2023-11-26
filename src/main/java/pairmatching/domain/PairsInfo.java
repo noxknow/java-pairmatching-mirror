@@ -3,7 +3,6 @@ package pairmatching.domain;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static pairmatching.handler.ConstantsHandler.*;
@@ -53,19 +52,11 @@ public class PairsInfo {
         return pair;
     }
 
-    public List<List<String>> getPairs() {
-        return Collections.unmodifiableList(pairs);
-    }
+    public boolean havePairs(String courseName, String levelName, String missionName) {
+        if (courseName == course && levelName == level && missionName == mission) {
+            return true;
+        }
 
-    public String getCourse() {
-        return course;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public String getMission() {
-        return mission;
+        return false;
     }
 }
