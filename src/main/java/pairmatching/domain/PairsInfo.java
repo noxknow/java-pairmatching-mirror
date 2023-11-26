@@ -59,4 +59,14 @@ public class PairsInfo {
 
         return false;
     }
+
+    public String getMatchingResult() {
+        StringBuilder matchingResult = new StringBuilder();
+
+        for (List<String> pair : pairs) {
+            matchingResult.append(String.join(" : ", pair)).append("\n");
+        }
+
+        return matchingResult.toString();
+    }
 }
