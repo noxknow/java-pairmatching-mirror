@@ -53,8 +53,8 @@ public class PairsInfo {
     }
 
     public boolean havePairs(String courseName, String levelName, String missionName) {
-        if (courseName == course && levelName == level && missionName == mission) {
-            return true;
+        if (courseName.equals(course) && levelName.equals(level) && missionName.equals(mission)) {
+            return !pairs.isEmpty();
         }
 
         return false;
