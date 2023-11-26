@@ -69,4 +69,8 @@ public class PairsInfo {
 
         return matchingResult.toString();
     }
+
+    public void matchingClear() {
+        pairs.clear();
+    }
 }
