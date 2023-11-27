@@ -64,7 +64,7 @@ public class PairsInfo {
         StringBuilder matchingResult = new StringBuilder();
 
         for (List<String> pair : pairs) {
-            matchingResult.append(String.join(" : ", pair)).append("\n");
+            matchingResult.append(String.join(JOIN_MARK.getWord(), pair)).append(NEW_LINE.getWord());
         }
 
         return matchingResult.toString();

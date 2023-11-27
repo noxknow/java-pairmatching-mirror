@@ -6,6 +6,8 @@ public enum ConstantsHandler {
     DEFAULT_PAIR_COUNT(2, ""),
     ODD_PAIR_COUNT(3, ""),
     ZERO_INDEX(0, ""),
+    JOIN_MARK(0, " : "),
+    NEW_LINE(0, "\n"),
 
     MATCHING_WORD(0, "1");
 
