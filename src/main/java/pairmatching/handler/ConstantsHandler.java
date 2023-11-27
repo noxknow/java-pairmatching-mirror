@@ -12,7 +12,9 @@ public enum ConstantsHandler {
     MATCHING_WORD(0, "1"),
     JOIN_LEVEL_MISSIONS(0, ": "),
     VERTICAL_BAR_DELIMITER(0, " | "),
-    PREFIX(0, "  - ");
+    PREFIX(0, "  - "),
+
+    COURSE_LEVEL_MISSIONS_DELIMITER(0, ", ");
 
     private final int value;
     private final String word;

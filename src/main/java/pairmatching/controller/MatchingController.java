@@ -27,9 +27,9 @@ public class MatchingController {
 
     private void selectMenu() {
         outputHandler.requestMenuMessage();
-        String inputValue = inputHandler.inputValue();
+        String inputMenu = inputHandler.inputValue();
 
-        if (inputValue.equals(MATCHING_WORD.getWord())) {
+        if (inputMenu.equals(MATCHING_WORD.getWord())) {
             startMatching();
         }
     }
@@ -38,6 +38,8 @@ public class MatchingController {
         List<String> courses = loadCourses();
         List<String> levelMissions = loadLevelMissions();
         outputHandler.printCourseLevelMissions(courses, levelMissions);
+
+        String inputValue = inputHandler.inputValue();
     }
 
     private List<String> loadCourses() {
