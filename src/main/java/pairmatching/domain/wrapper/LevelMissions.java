@@ -3,7 +3,7 @@ package pairmatching.domain.wrapper;
 import java.util.Arrays;
 import java.util.List;
 
-import static pairmatching.handler.ErrorHandler.INVALID_LEVEL;
+import static pairmatching.handler.ErrorHandler.INVALID_LEVEL_MISSIONS;
 
 public enum LevelMissions {
 
@@ -21,14 +21,14 @@ public enum LevelMissions {
         this.missions = missions;
     }
 
-    public static LevelMissions getLevelMissions(String name) {
+    public static LevelMissions getLevelMissions(String name, String mission) {
         for (LevelMissions levelMissions : LevelMissions.values()) {
-            if (levelMissions.name().equals(name)) {
+            if (levelMissions.name.equals(name) && levelMissions.missions.contains(mission)) {
                 return levelMissions;
             }
         }
 
-        throw INVALID_LEVEL.getException();
+        throw INVALID_LEVEL_MISSIONS.getException();
     }
 
     public String getName() {
