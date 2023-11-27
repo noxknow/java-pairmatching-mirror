@@ -9,8 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static pairmatching.handler.ConstantsHandler.JOIN_LEVEL_MISSIONS;
-import static pairmatching.handler.ConstantsHandler.MATCHING_WORD;
+import static pairmatching.handler.ConstantsHandler.*;
 
 public class MatchingController {
 
@@ -36,7 +35,9 @@ public class MatchingController {
     }
 
     private void startMatching() {
-
+        List<String> courses = loadCourses();
+        List<String> levelMissions = loadLevelMissions();
+        outputHandler.printCourseLevelMissions(courses, levelMissions);
     }
 
     private List<String> loadCourses() {
@@ -49,7 +50,7 @@ public class MatchingController {
 
     private List<String> loadLevelMissions() {
         List<String> levelMissions = Arrays.stream(LevelMissions.values())
-                .map(levelMission -> levelMission.getName() + JOIN_LEVEL_MISSIONS + levelMission.getMissions())
+                .map(levelMission -> levelMission.getName() + JOIN_LEVEL_MISSIONS.getWord() + String.join(VERTICAL_BAR_DELIMITER.getWord(), levelMission.getMissions()))
                 .collect(Collectors.toList());
 
         return levelMissions;
