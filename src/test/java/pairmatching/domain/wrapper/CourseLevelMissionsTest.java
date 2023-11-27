@@ -17,4 +17,13 @@ public class CourseLevelMissionsTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorHandler.INVALID_FORMAT.getException().getMessage());
     }
+
+    @DisplayName("과정이 존재하지 않는다면 예외가 발생한다.")
+    @ParameterizedTest(name = "[{index}] input {0}")
+    @ValueSource(strings = {"프론트앤드, 레벨1, 자동차경주", "박엔드, 레벨1, 자동차경주", "자동차경주, 레벨1, 자동차경주"})
+    void createCourseLevelMissionsByInvalidCourse(String inputValue) {
+        assertThatThrownBy(() -> CourseLevelMissions.from(inputValue))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorHandler.INVALID_COURSE.getException().getMessage());
+    }
 }
