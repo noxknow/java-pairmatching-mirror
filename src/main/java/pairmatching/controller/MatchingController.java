@@ -1,7 +1,12 @@
 package pairmatching.controller;
 
+import pairmatching.domain.wrapper.Course;
 import pairmatching.handler.InputHandler;
 import pairmatching.handler.OutputHandler;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static pairmatching.handler.ConstantsHandler.MATCHING_WORD;
 
@@ -30,5 +35,13 @@ public class MatchingController {
 
     private void startMatching() {
 
+    }
+
+    private List<String> loadCourses() {
+        List<String> courses = Arrays.stream(Course.values())
+                .map(Course::getName)
+                .collect(Collectors.toList());
+
+        return courses;
     }
 }

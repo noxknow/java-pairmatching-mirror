@@ -21,14 +21,6 @@ public enum LevelMissions {
         this.missions = missions;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public List<String> getMissions() {
-        return missions;
-    }
-
     public static LevelMissions getLevelMissions(String name) {
         for (LevelMissions levelMissions : LevelMissions.values()) {
             if (levelMissions.name().equals(name)) {
@@ -37,5 +29,13 @@ public enum LevelMissions {
         }
 
         throw INVALID_LEVEL.getException();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getMissions() {
+        return missions;
     }
 }
