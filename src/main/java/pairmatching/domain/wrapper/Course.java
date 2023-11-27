@@ -1,5 +1,7 @@
 package pairmatching.domain.wrapper;
 
+import static pairmatching.handler.ErrorHandler.INVALID_COURSE;
+
 public enum Course {
 
     BACKEND("백엔드"),
@@ -18,7 +20,7 @@ public enum Course {
             }
         }
 
-        return null;
+        throw INVALID_COURSE.getException();
     }
 
     public String getName() {
