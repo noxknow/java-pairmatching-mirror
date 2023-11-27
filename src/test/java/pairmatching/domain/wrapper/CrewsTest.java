@@ -33,7 +33,7 @@ public class CrewsTest {
     @DisplayName("과정에 따른 크루 리스트를 정상적으로 반환한다.")
     @ParameterizedTest(name = "[{index}] input {0}")
     @MethodSource("testCreateCrews")
-    void CreateCrews(Crews crews, List<String> expectedResult) {
+    void createCrews(Crews crews, List<String> expectedResult) {
         assertThat(crews.getCrews()).isEqualTo(expectedResult);
     }
 }
