@@ -4,19 +4,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static pairmatching.handler.ConstantsHandler.COURSE_LEVEL_MISSIONS_DELIMITER;
-import static pairmatching.handler.ConstantsHandler.ZERO_INDEX;
-import static pairmatching.handler.ErrorHandler.INVALID_COURSE;
-import static pairmatching.handler.ErrorHandler.INVALID_FORMAT;
+import static pairmatching.handler.ConstantsHandler.*;
+import static pairmatching.handler.ErrorHandler.*;
 
 public class CourseLevelMissions {
 
     private final List<String> values;
     private final Course course;
+    private final LevelMissions levelMissions;
 
     private CourseLevelMissions(String inputValue) {
         this.values = validateFormat(inputValue);
         this.course = validateCourse(values.get(ZERO_INDEX.getValue()));
+        this.levelMissions = validateLevelMissions(values.get(FIRST_INDEX.getValue()), values.get(SECOND_INDEX.getValue()));
     }
 
     public static CourseLevelMissions from(String inputValue) {
@@ -40,6 +40,15 @@ public class CourseLevelMissions {
             return course;
         } catch (IllegalArgumentException e) {
             throw INVALID_COURSE.getException();
+        }
+    }
+
+    private LevelMissions validateLevelMissions(String levelName, String missionName) {
+        try {
+            LevelMissions levelMissions = LevelMissions.getLevelMissions(levelName, missionName);
+            return levelMissions;
+        } catch (IllegalArgumentException e) {
+            throw INVALID_LEVEL_MISSIONS.getException();
         }
     }
 }
