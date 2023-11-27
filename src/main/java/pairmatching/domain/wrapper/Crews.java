@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static pairmatching.handler.ErrorHandler.INVALID_PATH;
@@ -21,6 +23,8 @@ public class Crews {
     }
 
     private List<String> readFile(String course) throws IOException {
+        List<String> crews = new ArrayList<>();
+
         try {
             Path filePath = Paths.get("src/main/resources/" + course + "-crew.md");
             crews.addAll(Files.readAllLines(filePath));
@@ -32,6 +36,6 @@ public class Crews {
     }
 
     public List<String> getCrews() {
-        return crews;
+        return Collections.unmodifiableList(crews);
     }
 }
