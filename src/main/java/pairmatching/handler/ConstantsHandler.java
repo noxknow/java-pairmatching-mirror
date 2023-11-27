@@ -9,7 +9,8 @@ public enum ConstantsHandler {
     JOIN_MARK(0, " : "),
     NEW_LINE(0, "\n"),
 
-    MATCHING_WORD(0, "1");
+    MATCHING_WORD(0, "1"),
+    JOIN_LEVEL_MISSIONS(0, ": ");
 
     private final int value;
     private final String word;

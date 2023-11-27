@@ -1,6 +1,7 @@
 package pairmatching.controller;
 
 import pairmatching.domain.wrapper.Course;
+import pairmatching.domain.wrapper.LevelMissions;
 import pairmatching.handler.InputHandler;
 import pairmatching.handler.OutputHandler;
 
@@ -8,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static pairmatching.handler.ConstantsHandler.JOIN_LEVEL_MISSIONS;
 import static pairmatching.handler.ConstantsHandler.MATCHING_WORD;
 
 public class MatchingController {
@@ -43,5 +45,13 @@ public class MatchingController {
                 .collect(Collectors.toList());
 
         return courses;
+    }
+
+    private List<String> loadLevelMissions() {
+        List<String> levelMissions = Arrays.stream(LevelMissions.values())
+                .map(levelMission -> levelMission.getName() + JOIN_LEVEL_MISSIONS + levelMission.getMissions())
+                .collect(Collectors.toList());
+
+        return levelMissions;
     }
 }
