@@ -10,7 +10,7 @@ import static pairmatching.handler.ConstantsHandler.VERTICAL_BAR_DELIMITER;
 public class ConsoleOutPut implements OutputHandler {
 
     @Override
-    public void printMenuMessage() {
+    public void requestMenuMessage() {
         System.out.println("기능을 선택하세요.\n" +
                 "1. 페어 매칭\n" +
                 "2. 페어 조회\n" +

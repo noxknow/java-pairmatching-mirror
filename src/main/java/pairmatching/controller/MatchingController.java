@@ -26,7 +26,7 @@ public class MatchingController {
     }
 
     private void selectMenu() {
-        outputHandler.printMenuMessage();
+        outputHandler.requestMenuMessage();
         String inputValue = inputHandler.inputValue();
 
         if (inputValue.equals(MATCHING_WORD.getWord())) {
