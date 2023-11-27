@@ -26,4 +26,13 @@ public class CourseLevelMissionsTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorHandler.INVALID_COURSE.getException().getMessage());
     }
+
+    @DisplayName("레벨과 미션이 일치하지 않는다면 예외가 발생한다.")
+    @ParameterizedTest(name = "[{index}] input {0}")
+    @ValueSource(strings = {"프론트엔드, 레벨0, 자동차경주", "백엔드, 레벨1, 자동차겅주", "프론트엔드, 레벨1, 결제"})
+    void createCourseLevelMissionsByInvalidLevelMissions(String inputValue) {
+        assertThatThrownBy(() -> CourseLevelMissions.from(inputValue))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorHandler.INVALID_LEVEL_MISSIONS.getException().getMessage());
+    }
 }
