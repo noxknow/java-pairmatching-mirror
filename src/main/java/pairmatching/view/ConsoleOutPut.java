@@ -40,4 +40,11 @@ public class ConsoleOutPut implements OutputHandler {
         System.out.println("페어 매칭 결과입니다.");
         System.out.println(matchingResult);
     }
+
+    @Override
+    public void requestRematch() {
+        System.out.println();
+        System.out.println("매칭 정보가 있습니다. 다시 매칭하시겠습니까?");
+        System.out.println("네 | 아니오");
+    }
 }

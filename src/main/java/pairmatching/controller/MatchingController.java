@@ -54,7 +54,7 @@ public class MatchingController {
         PairsInfo pairsInfo = PairsInfo.of(crewNames, course, level, mission);
 
         if (pairsInfo.havePairs(course, level, mission)) {
-
+            outputHandler.requestRematch();
         } else if (!pairsInfo.havePairs(course, level, mission)) {
             outputHandler.printMatchingResult(pairsInfo.getMatchingResult());
         }
