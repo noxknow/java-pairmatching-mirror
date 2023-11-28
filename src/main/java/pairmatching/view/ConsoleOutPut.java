@@ -33,4 +33,11 @@ public class ConsoleOutPut implements OutputHandler {
         System.out.println("과정, 레벨, 미션을 선택하세요.");
         System.out.println("ex) 백엔드, 레벨1, 자동차경주");
     }
+
+    @Override
+    public void printMatchingResult(String matchingResult) {
+        System.out.println();
+        System.out.println("페어 매칭 결과입니다.");
+        System.out.println(matchingResult);
+    }
 }

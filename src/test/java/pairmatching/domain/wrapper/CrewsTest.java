@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -14,7 +13,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CrewsTest {
 
-    private static Stream<Arguments> testCreateCrews() throws IOException { // List.of()가 자바 9버전 부터 가능해서 Arrays.asList() 사용
+    private static Stream<Arguments> testCreateCrews() { // List.of()가 자바 9버전 부터 가능해서 Arrays.asList() 사용
         return Stream.of(
                 Arguments.of(Crews.from("backend"), Arrays.asList(
                         "백호", "태웅", "치수", "태섭", "대만",

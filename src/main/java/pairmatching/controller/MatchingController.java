@@ -1,6 +1,9 @@
 package pairmatching.controller;
 
+import pairmatching.domain.PairsInfo;
 import pairmatching.domain.wrapper.Course;
+import pairmatching.domain.wrapper.CourseLevelMissions;
+import pairmatching.domain.wrapper.Crews;
 import pairmatching.domain.wrapper.LevelMissions;
 import pairmatching.handler.InputHandler;
 import pairmatching.handler.OutputHandler;
@@ -22,11 +25,12 @@ public class MatchingController {
     }
 
     public void run() {
+        outputHandler.requestMenuMessage();
+
         selectMenu();
     }
 
     private void selectMenu() {
-        outputHandler.requestMenuMessage();
         String inputMenu = inputHandler.inputValue();
 
         if (inputMenu.equals(MATCHING_WORD.getWord())) {
@@ -35,11 +39,31 @@ public class MatchingController {
     }
 
     private void startMatching() {
+        showCourseLevelMissions();
+
+        String inputValue = inputHandler.inputValue();
+        CourseLevelMissions courseLevelMissions = CourseLevelMissions.from(inputValue);
+
+        String course = courseLevelMissions.getCourse();
+        String level = courseLevelMissions.getLevel();
+        String mission = courseLevelMissions.getMission();
+
+        Crews crews = Crews.from(Course.valueOf(course).name().toLowerCase());
+        List<String> crewNames = crews.getCrews();
+
+        PairsInfo pairsInfo = PairsInfo.of(crewNames, course, level, mission);
+
+        if (pairsInfo.havePairs(course, level, mission)) {
+
+        } else if (!pairsInfo.havePairs(course, level, mission)) {
+            outputHandler.printMatchingResult(pairsInfo.getMatchingResult());
+        }
+    }
+
+    private void showCourseLevelMissions() {
         List<String> courses = loadCourses();
         List<String> levelMissions = loadLevelMissions();
         outputHandler.printCourseLevelMissions(courses, levelMissions);
-
-        String inputValue = inputHandler.inputValue();
     }
 
     private List<String> loadCourses() {

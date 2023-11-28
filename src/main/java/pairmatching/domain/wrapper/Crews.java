@@ -14,15 +14,15 @@ public class Crews {
 
     private final List<String> crews;
 
-    private Crews(String course) throws IOException {
+    private Crews(String course) {
         this.crews = readFile(course);
     }
 
-    public static Crews from(String course) throws IOException {
+    public static Crews from(String course) {
         return new Crews(course);
     }
 
-    private List<String> readFile(String course) throws IOException {
+    private List<String> readFile(String course) {
         List<String> crews = new ArrayList<>();
 
         try {

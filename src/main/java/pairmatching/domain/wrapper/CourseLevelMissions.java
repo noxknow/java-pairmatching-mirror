@@ -10,13 +10,15 @@ import static pairmatching.handler.ErrorHandler.*;
 public class CourseLevelMissions {
 
     private final List<String> values;
-    private final Course course;
-    private final LevelMissions levelMissions;
+    private final String course;
+    private final String level;
+    private final String mission;
 
     private CourseLevelMissions(String inputValue) {
         this.values = validateFormat(inputValue);
-        this.course = validateCourse(values.get(ZERO_INDEX.getValue()));
-        this.levelMissions = validateLevelMissions(values.get(FIRST_INDEX.getValue()), values.get(SECOND_INDEX.getValue()));
+        this.course = values.get(ZERO_INDEX.getValue());
+        this.level = values.get(FIRST_INDEX.getValue());
+        this.mission = values.get(SECOND_INDEX.getValue());
     }
 
     public static CourseLevelMissions from(String inputValue) {
@@ -34,21 +36,15 @@ public class CourseLevelMissions {
         return values;
     }
 
-    private Course validateCourse(String courseName) {
-        try {
-            Course course = Course.getCourse(courseName);
-            return course;
-        } catch (IllegalArgumentException e) {
-            throw INVALID_COURSE.getException();
-        }
+    public String getCourse() {
+        return course;
     }
 
-    private LevelMissions validateLevelMissions(String levelName, String missionName) {
-        try {
-            LevelMissions levelMissions = LevelMissions.getLevelMissions(levelName, missionName);
-            return levelMissions;
-        } catch (IllegalArgumentException e) {
-            throw INVALID_LEVEL_MISSIONS.getException();
-        }
+    public String getLevel() {
+        return level;
+    }
+
+    public String getMission() {
+        return mission;
     }
 }
