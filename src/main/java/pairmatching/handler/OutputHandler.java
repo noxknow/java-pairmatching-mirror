@@ -8,4 +8,5 @@ public interface OutputHandler {
     void printCourseLevelMissions(List<String> courses, List<String> levelMissions);
     void printMatchingResult(String matchingResult);
     void requestRematch();
+    void printSelectInfo();
 }

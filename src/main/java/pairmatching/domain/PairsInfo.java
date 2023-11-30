@@ -3,6 +3,7 @@ package pairmatching.domain;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static pairmatching.handler.ConstantsHandler.*;
@@ -72,5 +73,9 @@ public class PairsInfo {
 
     public void matchingClear() {
         pairs.clear();
+    }
+
+    public List<List<String>> getPairs() {
+        return Collections.unmodifiableList(pairs);
     }
 }

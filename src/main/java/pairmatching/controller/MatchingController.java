@@ -1,5 +1,6 @@
 package pairmatching.controller;
 
+import pairmatching.domain.PairsGroup;
 import pairmatching.domain.PairsInfo;
 import pairmatching.domain.wrapper.Course;
 import pairmatching.domain.wrapper.CourseLevelMissions;
@@ -41,23 +42,9 @@ public class MatchingController {
     private void startMatching() {
         showCourseLevelMissions();
 
-        String inputValue = inputHandler.inputValue();
-        CourseLevelMissions courseLevelMissions = CourseLevelMissions.from(inputValue);
+        PairsGroup pairsGroup = PairsGroup.create();
 
-        String course = courseLevelMissions.getCourse();
-        String level = courseLevelMissions.getLevel();
-        String mission = courseLevelMissions.getMission();
-
-        Crews crews = Crews.from(Course.valueOf(course).name().toLowerCase());
-        List<String> crewNames = crews.getCrews();
-
-        PairsInfo pairsInfo = PairsInfo.of(crewNames, course, level, mission);
-
-        if (pairsInfo.havePairs(course, level, mission)) {
-            outputHandler.requestRematch();
-        } else if (!pairsInfo.havePairs(course, level, mission)) {
-            outputHandler.printMatchingResult(pairsInfo.getMatchingResult());
-        }
+        createRandomPairs(pairsGroup, 0);
     }
 
     private void showCourseLevelMissions() {
@@ -80,5 +67,69 @@ public class MatchingController {
                 .collect(Collectors.toList());
 
         return levelMissions;
+    }
+
+    private CourseLevelMissions loadCourseLevelMissions() {
+        outputHandler.printSelectInfo();
+        String inputValue = inputHandler.inputValue();
+
+        return CourseLevelMissions.from(inputValue);
+    }
+
+    private Crews loadCrews(CourseLevelMissions courseLevelMissions) {
+        String course = courseLevelMissions.getCourse();
+        String courseName = Course.getCourse(course).name();
+
+        return Crews.from(courseName.toLowerCase());
+    }
+
+    private PairsInfo loadPairsInfo(CourseLevelMissions courseLevelMissions, Crews crews) {
+        String course = courseLevelMissions.getCourse();
+        String level = courseLevelMissions.getLevel();
+        String mission = courseLevelMissions.getMission();
+        List<String> crewNames = crews.getCrews();
+
+        return PairsInfo.of(crewNames, course, level, mission);
+    }
+
+    private boolean checkPairs(CourseLevelMissions courseLevelMissions, PairsInfo pairsInfo) {
+        String course = courseLevelMissions.getCourse();
+        String level = courseLevelMissions.getLevel();
+        String mission = courseLevelMissions.getMission();
+
+        if (pairsInfo.havePairs(course, level, mission)) {
+            outputHandler.requestRematch();
+            String inputRematch = inputHandler.inputValue();
+            return inputRematch.equals("아니오");
+        }
+
+        return false;
+    }
+
+    private void createRandomPairs(PairsGroup pairsGroup, int tryCount) {
+        boolean existPairs = true;
+        PairsInfo pairsInfo = null;
+
+        while (existPairs && tryCount < 4) {
+            tryCount += 1;
+            CourseLevelMissions courseLevelMissions = loadCourseLevelMissions();
+            Crews crews = loadCrews(courseLevelMissions);
+            pairsInfo = loadPairsInfo(courseLevelMissions, crews);
+
+            existPairs = checkPairs(courseLevelMissions, pairsInfo);
+        }
+
+        pairsWithRetry(pairsGroup, pairsInfo, tryCount);
+    }
+
+    private void pairsWithRetry(PairsGroup pairsGroup, PairsInfo pairsInfo, int tryCount) {
+        boolean retry = pairsGroup.checkDuplicate(pairsInfo);
+
+        if (retry) {
+            createRandomPairs(pairsGroup, tryCount+1);
+        } else if (!retry) {
+            pairsGroup.addPairs(pairsInfo);
+            outputHandler.printMatchingResult(pairsInfo.getMatchingResult());
+        }
     }
 }
