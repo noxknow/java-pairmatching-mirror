@@ -54,6 +54,8 @@ public class ConsoleOutPut implements OutputHandler {
 
     @Override
     public void printError(String errorMessage) {
+        System.out.println();
         System.out.println(errorMessage);
+        System.out.println();
     }
 }

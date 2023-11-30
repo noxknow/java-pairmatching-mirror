@@ -5,10 +5,9 @@ import java.util.List;
 
 public class PairsGroup {
 
-    private final List<PairsInfo> pairsGroup;
+    private static final List<PairsInfo> pairsGroup = new ArrayList<>();
 
     private PairsGroup() {
-        this.pairsGroup = new ArrayList<>();
     }
 
     public static PairsGroup create() {

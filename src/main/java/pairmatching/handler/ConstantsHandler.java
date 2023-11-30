@@ -12,6 +12,7 @@ public enum ConstantsHandler {
     NEW_LINE(0, "\n"),
 
     MATCHING_WORD(0, "1"),
+    QUIT_WORD(0, "Q"),
     JOIN_LEVEL_MISSIONS(0, ": "),
     VERTICAL_BAR_DELIMITER(0, " | "),
     PREFIX(0, "  - "),

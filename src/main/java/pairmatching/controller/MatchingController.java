@@ -29,21 +29,25 @@ public class MatchingController {
     public void run() {
         outputHandler.requestMenuMessage();
 
-        selectMenu();
+        PairsGroup pairsGroup = PairsGroup.create();
+
+        selectMenu(pairsGroup);
     }
 
-    private void selectMenu() {
+    private void selectMenu(PairsGroup pairsGroup) {
         String inputMenu = inputHandler.inputValue();
 
         if (inputMenu.equals(MATCHING_WORD.getWord())) {
-            startMatching();
+            startMatching(pairsGroup);
+        } else if (inputMenu.equals(QUIT_WORD.getWord())) {
+            return;
         }
+
+        run();
     }
 
-    private void startMatching() {
+    private void startMatching(PairsGroup pairsGroup) {
         showCourseLevelMissions();
-
-        PairsGroup pairsGroup = PairsGroup.create();
 
         createRandomPairs(pairsGroup, INIT_TRY_COUNT.getValue());
     }
@@ -126,7 +130,7 @@ public class MatchingController {
     private void pairsWithRetry(PairsGroup pairsGroup, PairsInfo pairsInfo, int tryCount) {
         boolean retry = pairsGroup.checkDuplicatePairs(pairsInfo);
 
-        if (tryCount == MAX_TRY_COUNT.getValue()) {
+        if (tryCount >= MAX_TRY_COUNT.getValue()) {
             outputHandler.printError(INVALID_MATCH.getException().getMessage());
             return;
         }
