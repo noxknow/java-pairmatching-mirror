@@ -92,12 +92,12 @@ public class MatchingController {
         return PairsInfo.of(crewNames, course, level, mission);
     }
 
-    private boolean checkPairs(CourseLevelMissions courseLevelMissions, PairsInfo pairsInfo) {
+    private boolean checkPairs(CourseLevelMissions courseLevelMissions, PairsGroup pairsGroup) {
         String course = courseLevelMissions.getCourse();
         String level = courseLevelMissions.getLevel();
         String mission = courseLevelMissions.getMission();
 
-        if (pairsInfo.havePairs(course, level, mission)) {
+        if (pairsGroup.havePairs(course, level, mission)) {
             outputHandler.requestRematch();
             String inputRematch = inputHandler.inputValue();
             return inputRematch.equals("아니오");
@@ -116,14 +116,14 @@ public class MatchingController {
             Crews crews = loadCrews(courseLevelMissions);
             pairsInfo = loadPairsInfo(courseLevelMissions, crews);
 
-            existPairs = checkPairs(courseLevelMissions, pairsInfo);
+            existPairs = checkPairs(courseLevelMissions, pairsGroup);
         }
 
         pairsWithRetry(pairsGroup, pairsInfo, tryCount);
     }
 
     private void pairsWithRetry(PairsGroup pairsGroup, PairsInfo pairsInfo, int tryCount) {
-        boolean retry = pairsGroup.checkDuplicate(pairsInfo);
+        boolean retry = pairsGroup.checkDuplicatePairs(pairsInfo);
 
         if (retry) {
             createRandomPairs(pairsGroup, tryCount+1);

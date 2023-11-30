@@ -53,14 +53,6 @@ public class PairsInfo {
         return pair;
     }
 
-    public boolean havePairs(String courseName, String levelName, String missionName) {
-        if (courseName.equals(course) && levelName.equals(level) && missionName.equals(mission)) {
-            return !pairs.isEmpty();
-        }
-
-        return false;
-    }
-
     public String getMatchingResult() {
         StringBuilder matchingResult = new StringBuilder();
 
@@ -77,5 +69,17 @@ public class PairsInfo {
 
     public List<List<String>> getPairs() {
         return Collections.unmodifiableList(pairs);
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public String getMission() {
+        return mission;
     }
 }

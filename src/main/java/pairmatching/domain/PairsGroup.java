@@ -19,7 +19,7 @@ public class PairsGroup {
         pairsGroup.add(pairsInfo);
     }
 
-    public boolean checkDuplicate(PairsInfo pairsInfo) {
+    public boolean checkDuplicatePairs(PairsInfo pairsInfo) {
         List<List<String>> newPairs = pairsInfo.getPairs();
 
         for (PairsInfo existingPairsInfo : pairsGroup) {
@@ -31,5 +31,12 @@ public class PairsGroup {
         }
 
         return false;
+    }
+
+    public boolean havePairs(String course,String level,String mission) {
+        return pairsGroup.stream()
+                .filter(pairs -> pairs.getCourse().equals(course))
+                .filter(pairs -> pairs.getLevel().equals(level))
+                .anyMatch(pairs -> pairs.getMission().equals(mission));
     }
 }
