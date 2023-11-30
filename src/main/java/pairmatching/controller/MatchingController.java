@@ -44,7 +44,7 @@ public class MatchingController {
 
         PairsGroup pairsGroup = PairsGroup.create();
 
-        createRandomPairs(pairsGroup, 0);
+        createRandomPairs(pairsGroup, INIT_TRY_COUNT.getValue());
     }
 
     private void showCourseLevelMissions() {
@@ -100,7 +100,7 @@ public class MatchingController {
         if (pairsGroup.havePairs(course, level, mission)) {
             outputHandler.requestRematch();
             String inputRematch = inputHandler.inputValue();
-            return inputRematch.equals("아니오");
+            return inputRematch.equals(DO_NOT_REMATCH.getWord());
         }
 
         return false;
@@ -110,7 +110,7 @@ public class MatchingController {
         boolean existPairs = true;
         PairsInfo pairsInfo = null;
 
-        while (existPairs && tryCount < 4) {
+        while (existPairs && tryCount < MAX_TRY_COUNT.getValue()) {
             tryCount += 1;
             CourseLevelMissions courseLevelMissions = loadCourseLevelMissions();
             Crews crews = loadCrews(courseLevelMissions);
