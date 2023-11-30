@@ -19,7 +19,8 @@ public enum ConstantsHandler {
     COURSE_LEVEL_MISSIONS_DELIMITER(0, ", "),
     INIT_TRY_COUNT(0, ""),
     DO_NOT_REMATCH(0, "아니오"),
-    MAX_TRY_COUNT(4, "");
+    OVER_TRY_COUNT(4, ""),
+    MAX_TRY_COUNT(3, "");
 
     private final int value;
     private final String word;

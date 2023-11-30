@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static pairmatching.handler.ConstantsHandler.*;
+import static pairmatching.handler.ErrorHandler.INVALID_MATCH;
 
 public class MatchingController {
 
@@ -110,7 +111,7 @@ public class MatchingController {
         boolean existPairs = true;
         PairsInfo pairsInfo = null;
 
-        while (existPairs && tryCount < MAX_TRY_COUNT.getValue()) {
+        while (existPairs && tryCount < OVER_TRY_COUNT.getValue()) {
             tryCount += 1;
             CourseLevelMissions courseLevelMissions = loadCourseLevelMissions();
             Crews crews = loadCrews(courseLevelMissions);
@@ -124,6 +125,11 @@ public class MatchingController {
 
     private void pairsWithRetry(PairsGroup pairsGroup, PairsInfo pairsInfo, int tryCount) {
         boolean retry = pairsGroup.checkDuplicatePairs(pairsInfo);
+
+        if (tryCount == MAX_TRY_COUNT.getValue()) {
+            outputHandler.printError(INVALID_MATCH.getException().getMessage());
+            return;
+        }
 
         if (retry) {
             createRandomPairs(pairsGroup, tryCount+1);

@@ -9,4 +9,5 @@ public interface OutputHandler {
     void printMatchingResult(String matchingResult);
     void requestRematch();
     void printSelectInfo();
+    void printError(String errorMessage);
 }
