@@ -39,6 +39,8 @@ public class MatchingController {
 
         if (inputMenu.equals(MATCHING_WORD.getWord())) {
             startMatching(pairsGroup);
+        } else if (inputMenu.equals(VIEW_WORD.getWord())) {
+            startView(pairsGroup);
         } else if (inputMenu.equals(QUIT_WORD.getWord())) {
             return;
         }
@@ -50,6 +52,16 @@ public class MatchingController {
         showCourseLevelMissions();
 
         createRandomPairs(pairsGroup, INIT_TRY_COUNT.getValue());
+    }
+
+    private void startView(PairsGroup pairsGroup) {
+        showCourseLevelMissions();
+
+        CourseLevelMissions courseLevelMissions = loadCourseLevelMissions();
+
+        String matchingResult = loadMatchingResult(courseLevelMissions, pairsGroup);
+
+        outputHandler.printMatchingResult(matchingResult);
     }
 
     private void showCourseLevelMissions() {
@@ -116,7 +128,7 @@ public class MatchingController {
         PairsInfo pairsInfo = null;
 
         while (existPairs && tryCount < OVER_TRY_COUNT.getValue()) {
-            tryCount += 1;
+            tryCount += INCREMENT_TRY_COUNT.getValue();
             CourseLevelMissions courseLevelMissions = loadCourseLevelMissions();
             Crews crews = loadCrews(courseLevelMissions);
             pairsInfo = loadPairsInfo(courseLevelMissions, crews);
@@ -136,10 +148,25 @@ public class MatchingController {
         }
 
         if (retry) {
-            createRandomPairs(pairsGroup, tryCount+1);
+            createRandomPairs(pairsGroup, tryCount+INCREMENT_TRY_COUNT.getValue());
         } else if (!retry) {
             pairsGroup.addPairs(pairsInfo);
             outputHandler.printMatchingResult(pairsInfo.getMatchingResult());
         }
+    }
+
+    private String loadMatchingResult(CourseLevelMissions courseLevelMissions, PairsGroup pairsGroup) {
+        PairsInfo pairsInfo = null;
+
+        try {
+            String course = courseLevelMissions.getCourse();
+            String level = courseLevelMissions.getLevel();
+            String mission = courseLevelMissions.getMission();
+            pairsInfo = pairsGroup.searchInfo(course, level, mission);
+        } catch (IllegalArgumentException e) {
+            outputHandler.printError(e.getMessage());
+        }
+
+        return pairsInfo.getMatchingResult();
     }
 }

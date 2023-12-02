@@ -12,6 +12,7 @@ public enum ConstantsHandler {
     NEW_LINE(0, "\n"),
 
     MATCHING_WORD(0, "1"),
+    VIEW_WORD(0, "2"),
     QUIT_WORD(0, "Q"),
     JOIN_LEVEL_MISSIONS(0, ": "),
     VERTICAL_BAR_DELIMITER(0, " | "),
@@ -21,7 +22,8 @@ public enum ConstantsHandler {
     INIT_TRY_COUNT(0, ""),
     DO_NOT_REMATCH(0, "아니오"),
     OVER_TRY_COUNT(4, ""),
-    MAX_TRY_COUNT(3, "");
+    MAX_TRY_COUNT(3, ""),
+    INCREMENT_TRY_COUNT(1, "");
 
     private final int value;
     private final String word;
