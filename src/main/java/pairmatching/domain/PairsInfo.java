@@ -63,10 +63,6 @@ public class PairsInfo {
         return matchingResult.toString();
     }
 
-    public void matchingClear() {
-        pairs.clear();
-    }
-
     public List<List<String>> getPairs() {
         return Collections.unmodifiableList(pairs);
     }

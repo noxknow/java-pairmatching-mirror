@@ -10,4 +10,5 @@ public interface OutputHandler {
     void requestRematch();
     void printSelectInfo();
     void printError(String errorMessage);
+    void printClear();
 }

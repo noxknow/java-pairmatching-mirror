@@ -41,6 +41,8 @@ public class MatchingController {
             startMatching(pairsGroup);
         } else if (inputMenu.equals(VIEW_WORD.getWord())) {
             startView(pairsGroup);
+        } else if (inputMenu.equals(CLEAR_WORD.getWord())) {
+            matchClear(pairsGroup);
         } else if (inputMenu.equals(QUIT_WORD.getWord())) {
             return;
         }
@@ -62,6 +64,12 @@ public class MatchingController {
         String matchingResult = loadMatchingResult(courseLevelMissions, pairsGroup);
 
         outputHandler.printMatchingResult(matchingResult);
+    }
+
+    private void matchClear(PairsGroup pairsGroup) {
+        outputHandler.printClear();
+
+        pairsGroup.clearGroup();
     }
 
     private void showCourseLevelMissions() {

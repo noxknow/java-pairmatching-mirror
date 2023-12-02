@@ -13,6 +13,7 @@ public enum ConstantsHandler {
 
     MATCHING_WORD(0, "1"),
     VIEW_WORD(0, "2"),
+    CLEAR_WORD(0, "3"),
     QUIT_WORD(0, "Q"),
     JOIN_LEVEL_MISSIONS(0, ": "),
     VERTICAL_BAR_DELIMITER(0, " | "),

@@ -49,4 +49,8 @@ public class PairsGroup {
                 .reduce((first, second) -> second)
                 .orElseThrow(INVALID_TO_FIND_RESULT::getException);
     }
+
+    public void clearGroup() {
+        pairsGroup.clear();
+    }
 }
